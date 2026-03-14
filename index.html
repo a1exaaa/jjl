@@ -1,17 +1,16 @@
-```html
 <!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>江江乐 · 生态IP</title>
+    <title>江江东乐 · 生态IP</title>
     <style>
-        /* 基础重置 & 字体 */
+        /* 基础重置：确保滚动正常 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
@@ -19,24 +18,23 @@
             display: flex;
             justify-content: center;
             padding: 24px 16px;
+            min-height: 100vh;      /* 至少撑满视口高度，允许内容更多时滚动 */
         }
 
-        /* 主容器：卡片式页面 */
+        /* 主卡片容器：不限制高度，内容自动扩展 */
         .page {
             max-width: 1200px;
             width: 100%;
             background-color: #ffffff;
             border-radius: 28px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 6px 12px rgba(0, 0, 0, 0.05);
-            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
             padding: 24px 32px 32px 32px;
         }
 
-        /* 导航栏 (知识科普 · 志愿 · 研学 · 创意工坊 · 文创 · 定制服务 · 队伍) */
+        /* 导航栏（七个栏目） */
         .nav-bar {
-            margin: 0 0 18px 0;
+            margin-bottom: 18px;
         }
-
         .nav-links {
             display: flex;
             list-style: none;
@@ -48,265 +46,173 @@
             border-bottom: 1px solid #f0f0f3;
             padding-bottom: 14px;
         }
-
         .nav-links li {
             cursor: default;
-            transition: color 0.2s;
             color: #4b4b55;
         }
-
         .nav-links li:hover {
             color: #007aff;
         }
 
-        /* 中间大标题栏 —— 江江乐 */
-        .jiang-section {
+        /* 主标题：江江东乐 */
+        .hero {
             margin: 20px 0 32px 0;
             background: linear-gradient(145deg, #f2f2fc, #eaeef5);
             border-radius: 60px;
             padding: 32px 20px;
             text-align: center;
             border: 1px solid #ffffff50;
-            box-shadow: inset 0 2px 4px rgba(255,255,255,0.8), 0 6px 12px rgba(0,0,0,0.02);
         }
-
-        .jiang-section h1 {
+        .hero h1 {
             font-size: 5rem;
             font-weight: 800;
             letter-spacing: 4px;
             color: #1f2b3a;
-            text-shadow: 2px 2px 0 rgba(255,255,255,0.6);
             line-height: 1.1;
-            word-break: keep-all;
         }
-
-        .jiang-section p {
+        .hero p {
             color: #4a5361;
             font-size: 1.2rem;
             margin-top: 8px;
             font-weight: 300;
         }
 
-        /* 主内容区域 (两列布局) */
+        /* 双列布局 */
         .main-grid {
             display: grid;
-            grid-template-columns: 220px 1fr;
+            grid-template-columns: 240px 1fr;
             gap: 28px;
             margin-top: 12px;
         }
 
-        /* 左侧边栏 —— 江江乐子栏目 */
+        /* 左侧边栏 */
         .sidebar {
             background-color: #fbfbfd;
             border-radius: 24px;
             padding: 22px 16px;
             border: 1px solid #efeff4;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
             height: fit-content;
         }
-
-        .sidebar-title {
-            font-size: 1.1rem;
+        .sidebar h3 {
+            font-size: 1.2rem;
             font-weight: 600;
             color: #2c2c2e;
             margin-bottom: 20px;
-            padding-bottom: 12px;
+            padding-bottom: 10px;
             border-bottom: 1px dashed #dcdce0;
-            letter-spacing: 0.3px;
         }
-
-        .sidebar-title span {
-            background-color: #eaeef5;
-            padding: 4px 12px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 400;
-            color: #1f2b3a;
-            margin-left: 8px;
-        }
-
-        .sidebar-list {
+        .sidebar ul {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
         }
-
-        .sidebar-list li {
+        .sidebar li {
             color: #3a3a44;
             font-size: 1.05rem;
-            font-weight: 450;
-            cursor: default;
             padding: 8px 12px;
             border-radius: 16px;
-            transition: 0.1s;
             background-color: #ffffff;
             border: 1px solid transparent;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            cursor: default;
         }
-
-        .sidebar-list li:hover {
+        .sidebar li:hover {
             background-color: #f2f2f7;
             border-color: #d9d9e0;
         }
-
-        .sidebar-list li::before {
-            content: "🌱";
-            font-size: 1rem;
-            opacity: 0.7;
-        }
-
-        /* 官网链接放在侧边栏底部 */
-              .sidebar-footer {
+        .official-link {
             margin-top: 28px;
             border-top: 1px solid #e1e1e8;
             padding-top: 18px;
-            font-size: 0.9rem;
-        }
-
-        .official-link {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background-color: #f2f6fc;
-            padding: 10px 14px;
-            border-radius: 40px;
+            font-size: 0.95rem;
             color: #0066cc;
             word-break: break-all;
-            border: 1px solid #dde3ed;
-            transition: 0.1s;
         }
 
-        .official-link:hover {
-            background-color: #e3ecf7;
-        }
-
-        /* 右侧内容区卡片 */
+        /* 右侧卡片通用 */
         .right-col {
             display: flex;
             flex-direction: column;
             gap: 24px;
         }
-
-        .info-card {
+        .card {
             background: #ffffff;
             border-radius: 28px;
-            padding: 24px 26px;
+            padding: 26px;
             border: 1px solid #edecf2;
             box-shadow: 0 8px 18px -6px rgba(0,0,0,0.05);
         }
-
-        .card-title {
-            font-size: 1.8rem;
+        .card h2 {
+            font-size: 2rem;
             font-weight: 650;
             color: #1f2b3a;
-            margin-bottom: 12px;
-            letter-spacing: -0.3px;
+            margin-bottom: 8px;
         }
-
-        .card-sub {
+        .card .subhead {
             color: #5d6b7a;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             font-size: 1.1rem;
             border-left: 4px solid #9bb8d4;
             padding-left: 16px;
-            background-color: #f7f9fc;
+            background: #f7f9fc;
             border-radius: 0 20px 20px 0;
             line-height: 1.5;
         }
-
-        .slogan-block {
+        .slogan-box {
             background-color: #eaf1da;
-            padding: 24px 22px;
+            padding: 22px;
             border-radius: 40px;
             margin: 16px 0 20px;
             border-left: 6px solid #4c7a5b;
         }
-
-        .slogan-block .slogan {
+        .slogan-box .main-slogan {
             font-size: 2.2rem;
             font-weight: 700;
             color: #1f4f2b;
             line-height: 1.2;
-            margin-bottom: 10px;
         }
-
-        .slogan-block .slogan-sub {
+        .slogan-box .sub-slogan {
             font-size: 1.2rem;
             color: #2e6a41;
-            font-weight: 400;
+            margin-top: 6px;
         }
-
-        .desc-text {
+        .desc {
             color: #2c2c2e;
             line-height: 1.7;
-            margin: 18px 0 10px;
             background: #fafafc;
-            padding: 18px 22px;
+            padding: 20px 24px;
             border-radius: 30px;
             font-size: 1.02rem;
+            margin: 16px 0;
         }
-
-        /* 文创产品展示区域 (卡片内) */
-        .cultural-creations {
+        .product-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 16px;
-            margin-top: 20px;
+            gap: 14px;
+            margin: 20px 0 10px;
         }
-
         .product-item {
             background-color: #f3f6fa;
             border-radius: 40px;
-            padding: 14px 24px;
+            padding: 12px 24px;
             border: 1px solid #d5deec;
-            display: flex;
-            align-items: center;
-            gap: 10px;
             font-size: 1rem;
             color: #1e2c3a;
-            transition: 0.1s;
             cursor: default;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
-
-        .product-item:hover {
-            background-color: #e9eff8;
-            border-color: #a7b9ce;
-        }
-
-        .product-item .emoji-big {
-            font-size: 1.6rem;
-        }
-
-        .more-link {
-            margin-top: 20px;
-            color: #0066cc;
-            background: #f0f4fe;
-            border-radius: 40px;
-            padding: 12px 20px;
-            text-align: center;
-            font-size: 0.95rem;
-            border: 1px solid #c2d6f0;
-        }
-
-        /* 页脚装饰 */ 
-               .footer-note {
+        .footer-note {
             margin-top: 36px;
             font-size: 0.85rem;
             color: #8e8e93;
             text-align: center;
             border-top: 1px solid #efeff4;
             padding-top: 20px;
-            letter-spacing: 0.3px;
         }
     </style>
 </head>
 <body>
     <div class="page">
-        <!-- 导航栏 (完全保留) -->
+        <!-- 导航栏（七个栏目） -->
         <div class="nav-bar">
             <ul class="nav-links">
                 <li>知识科普</li>
@@ -319,100 +225,66 @@
             </ul>
         </div>
 
-        <!-- 中间大标题：江江乐 (保留) -->
-        <div class="jiang-section">
-            <h1>江江乐</h1>
+        <!-- 主标题：江江东乐（根据图片调整） -->
+        <div class="hero">
+            <h1>江江东乐</h1>
             <p>乐水 · 乐山 · 乐自然</p>
         </div>
 
-        <!-- 主体内容：两列布局，全新内容 -->
+        <!-- 双列内容区 -->
         <div class="main-grid">
-            <!-- 左侧边栏：江江乐子栏目 + 官网链接 -->
+            <!-- 左侧：江江东·探索栏目 -->
             <aside class="sidebar">
-                <div class="sidebar-title">
-                    江江乐 · 探索 <span>栏目</span>
-                </div>
-                <ul class="sidebar-list">
+                <h3>江江东·探索 栏目</h3>
+                <ul>
                     <li>设计理念</li>
                     <li>生态知识了解</li>
                     <li>改善后的区域</li>
                     <li>小程序</li>
                 </ul>
-                <!-- 底部官网链接 -->
-                <div class="sidebar-footer">
-                    <div class="official-link">
-                        🔗 https://www.jiangjiangle.com
-                    </div>
-                    <div style="margin-top: 12px; font-size:0.85rem; color:#8f8f99; padding-left: 6px;">
-                        探索生态创意 · 江江乐官方
-                    </div>
+                <div class="official-link">
+                    🔗 https://www.jiangjiangle.com
                 </div>
             </aside>
 
-            <!-- 右侧内容区：两个卡片 (品牌介绍 + 文创产品) -->
+            <!-- 右侧：两个卡片（IP介绍 + 文创产品） -->
             <div class="right-col">
-                <!-- 卡片1：江江乐IP品牌介绍 -->
-                <div class="info-card">
-                    <div class="card-title">🌿 江江乐 IP</div>
-                    <div class="card-sub">一个生长在山水间的自然系IP</div>
-                    <div class="slogan-block">
-                        <div class="slogan">乐山乐水，自在江江</div>
-                        <div class="slogan-sub">把自然装进口袋</div>
+                <!-- 卡片1：江江东IP介绍 -->
+                <div class="card">
+                    <h2>🌿 江江东IP</h2>
+                    <div class="subhead">一个生长在山水间的自然系IP</div>
+                    <div class="slogan-box">
+                        <div class="main-slogan">乐山乐水，自在江江</div>
+                        <div class="sub-slogan">把自然装进口袋</div>
                     </div>
-                    <div class="desc-text">
+                    <div class="desc">
                         <strong>源于江河，乐于万象</strong><br>
-                        江江乐诞生于2024年，以中国本土生态与文化为灵感，通过可爱的江江形象传递“人与自然共生”的理念。无论是山林徒步还是溪畔小憩，江江乐陪伴你发现身边的美好。
-                    </div>
-                    <!-- 简约小尾巴 -->
-                    <div style="display: flex; justify-content: flex-end; margin-top: 16px; color:#6a7888; gap: 16px; font-size:0.9rem;">
-                        <span>#生态友好</span>
-                        <span>#在地文化</span>
+                        江江东乐诞生于2024年，以中国本土生态与文化为灵感，通过可爱的江江形象传递“人与自然共生”的理念。无论是山林徒步还是溪畔小憩，江江东乐陪伴你发现身边的美好。
                     </div>
                 </div>
 
-                <!-- 卡片2：文创产品展示 -->
-                <div class="info-card">
-                    <div class="card-title" style="font-size:1.8rem;">🛍️ 文创产品</div>
-                    <div class="cultural-creations">
-                        <div class="product-item">
-                            <span class="emoji-big">📘</span> 江江乐 · 山水笔记本
-                        </div>
-                        <div class="product-item">
-                            <span class="emoji-big">🧷</span> 生态徽章套装
-                        </div>
-                        <div class="product-item">
-                            <span class="emoji-big">👜</span> 帆布袋「江江的旅行」
-                        </div>
-                        <div class="product-item">
-                            <span class="emoji-big">☕</span> 随行陶瓷杯
-                        </div>
-                        <div class="product-item">
-                            <span class="emoji-big">🧩</span> 湿地拼图
-                        </div>
-                        <div class="product-item">
-                            <span class="emoji-big">📆</span> 2026 自然日历
-                        </div>
+                <!-- 卡片2：文创产品 -->
+                <div class="card">
+                    <h2>🛍️ 文创产品</h2>
+                    <div class="product-list">
+                        <span class="product-item">江江东乐·山水笔记本</span>
+                        <span class="product-item">生态微章套装</span>
+                        <span class="product-item">帆布袋「江江东的旅行」</span>
                     </div>
-                    <!-- 更多产品链接 -->
-                    <div class="more-link">
-                        🌱 全部文创产品 · 即将上线
+                    <!-- 图片中还有一句“https://www.jiangjiangle.com”已在左侧栏展示，此处可略或加个小提示 -->
+                    <div style="margin-top: 20px; color: #0066cc; font-size:0.95rem;">
+                        ✨ 更多文创即将上线
                     </div>
-                </div>
-
-                <!-- 额外装饰信息（可保留可删，这里放一句清新的话） -->
-                <div style="background: #f7faf5; border-radius: 60px; padding: 14px 24px; border:1px solid #dae5d4; font-size:0.95rem; color:#3c5e4c; display: flex; gap: 12px; align-items: center;">
-                    <span>🧊</span> 江江乐 · 每一件文创都融入自然灵感
-                    <span style="margin-left:auto;">🍃</span>
                 </div>
             </div>
         </div>
 
-        <!-- 底部简约落款 -->
+        <!-- 底部 -->
         <div class="footer-note">
-                     ⏳ 2026 · 江江乐 · 自然创意工作室
+            ⏳ 2026 · 江江东乐 · 自然创意工作室
         </div>
     </div>
-    <!-- 所有元素仅为视觉展示，无交互功能，符合“最开始的页面”要求 -->
+    <!-- 无多余文本，无固定高度，页面可自然滚动 -->
 </body>
 </html>
 ```
